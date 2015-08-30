@@ -4,7 +4,7 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <stdint.h>
-#include <stdarg.h>
+#include <inttypes.h>
 
 #include "crc32.h"
 
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
   if (file == MAP_FAILED)
     err(4, "Error mapping file to memory\n");
 
-  printf("%s: %ld\n", argv[1], crc32(0, file, st.st_size));
+  printf("%s: 0x%" PRIx32 "\n", argv[1], crc32(0, file, st.st_size));
 
   return 0;
 }
