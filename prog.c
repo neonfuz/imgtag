@@ -39,7 +39,7 @@ int main(int argc, char **argv)
       err(4, "Error mapping file \"%s\" to memory\n", argv[arg]);
     
     //    printf("%s: 0x%" PRIx32 "\n", argv[arg], crc32(0, file, st.st_size));
-    printf("insert into test (filename, crc32) values(%s, %"PRIu32");\n", argv[arg], crc32(0, file, st.st_size));
+    printf("insert into test (filename, crc32) values(\"%s\", %"PRIu32");\n", argv[arg], crc32(0, file, st.st_size));
 
     if(munmap(file, st.st_size) != 0)
       warn("Warning: couldn't unmap memory for file \"%s\"\n", argv[arg]);
