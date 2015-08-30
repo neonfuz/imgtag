@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/mman.h>
@@ -14,7 +15,7 @@
     return retval;				\
   } while (0);
 
-#define warn(format, ...) fprintf(stderr, format, ##__VA_ARGS__);)
+#define warn(format, ...) fprintf(stderr, format, ##__VA_ARGS__)
 
 int main(int argc, char **argv)
 {
@@ -37,7 +38,7 @@ int main(int argc, char **argv)
     if (file == MAP_FAILED)
       err(4, "Error mapping file \"%s\" to memory\n", argv[arg]);
     
-    printf("%s: 0x%" PRIx32 "\n", argv[arg], crc32(0, file, st.st_size));
+    //    printf("%s: 0x%" PRIx32 "\n", argv[arg], crc32(0, file, st.st_size));
     printf("insert into test (filename, crc32) values(%s, %"PRIu32");\n", argv[arg], crc32(0, file, st.st_size));
 
     if(munmap(file, st.st_size) != 0)
