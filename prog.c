@@ -14,6 +14,8 @@
     return retval;				\
   } while (0);
 
+#define warn(format, ...) fprintf(stderr, format, ##__VA_ARGS__);)
+
 int main(int argc, char **argv)
 {
   if (argc < 2)
@@ -38,8 +40,10 @@ int main(int argc, char **argv)
     printf("%s: 0x%" PRIx32 "\n", argv[arg], crc32(0, file, st.st_size));
     printf("insert into test (filename, crc32) values(%s, %"PRIu32");\n", argv[arg], crc32(0, file, st.st_size));
 
-    munmap(file, st.st_size);
-    close(fildes);
+    if(munmap(file, st.st_size) != 0)
+      warn("Warning: couldn't unmap memory for file \"%s\"\n", argv[arg]);
+    if(close(fildes) != 0)
+      warn("Warning: couldn't close file \"%s\"\n", argv[arg]);
   }
 
   return 0;
