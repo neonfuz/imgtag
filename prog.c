@@ -35,6 +35,7 @@ int main(int argc, char **argv)
     err(4, "Error mapping file to memory\n");
 
   printf("%s: 0x%" PRIx32 "\n", argv[1], crc32(0, file, st.st_size));
+  printf("insert into test (filename, crc32) values(%s, %"PRIu32");\n", argv[1], crc32(0, file, st.st_size));
 
   return 0;
 }
