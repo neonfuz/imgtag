@@ -8,43 +8,31 @@
 
 #include "crc32.h"
 
-#define err(retval, format, ...) \
-  fprintf(stderr, )
+#define err(retval, format, ...)		\
+  do {						\
+    fprintf(stderr, format, ##__VA_ARGS__);	\
+    return retval;				\
+  } while (0);
 
-int err(int retval, char *format, ...)
-{
-  va_list ap;
-  va_start(ap, format);
-
-  return retval;
-}
 
 int main(int argc, char **argv)
 {
-  if (argc != 2) {
-    fprintf(stderr, "Error, please specify exactly one file\n");
-    return 1;
-  }
+  if (argc != 2)
+    err(1, "Error, please specify exactly one file.\n");
 
   int fildes = open(argv[1], O_RDONLY);
-  if (fildes < 0) {
-    fprintf(stderr, "Error opening \"%s\"\n", argv[1]);
-    return 2;
-  }
+  if (fildes < 0)
+    err(2, "Error opening \"%s\"\n", argv[1]);
 
   struct stat st;
 
-  if (fstat(fildes, &st) < 0) {
-    fprintf(stderr, "Error stating file \"%s\"\n", argv[1]);
-    return 3;
-  }
+  if (fstat(fildes, &st) < 0)
+    err(3, "Error stating file \"%s\"\n", argv[1]);
 
   char *file = mmap(NULL, st.st_size, PROT_READ, MAP_SHARED, fildes, 0);
 
-  if (file == MAP_FAILED) {
-    fprintf(stderr, "Error mapping file to memory\n");
-    return 4;
-  }
+  if (file == MAP_FAILED)
+    err(4, "Error mapping file to memory\n");
 
   printf("%s: %ld\n", argv[1], crc32(0, file, st.st_size));
 
