@@ -1,4 +1,4 @@
-* Sorting ideas
+* Sorting
 ** keypress tag
  - define many tags, and bind them to keys, and or screen buttons
  - press button to tag image with that tag, and possibly go to next image
@@ -10,7 +10,11 @@
  - select images from previews, and expanded previews
  - check them, select tags and hit apply
  - preview applying tags by scrolling through images
-* other ideas
+* Viewing
+ - internal viewer, possibly sxiv based
+ - mount images like database, using fuse or 9P
+ - statically make directories for tags, and symlink or copy images into place
+* Other
 ** scaling images
  - waifu 2x
 ** reverse image search
