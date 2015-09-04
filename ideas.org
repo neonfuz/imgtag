@@ -1,0 +1,20 @@
+* Sorting ideas
+** keypress tag
+ - define many tags, and bind them to keys, and or screen buttons
+ - press button to tag image with that tag, and possibly go to next image
+ - possible back image button
+ - possible next image button
+** folders to tag
+ - select folder, and tag all images in that folder with the folder's name as a tag
+** overview select
+ - select images from previews, and expanded previews
+ - check them, select tags and hit apply
+ - preview applying tags by scrolling through images
+* other ideas
+** scaling images
+ - waifu 2x
+** reverse image search
+ - google
+ - tineye
+ - etc
+ - combined results?
